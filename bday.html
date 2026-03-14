@@ -29,8 +29,10 @@ z-index:2;
 /* intro */
 
 #intro{
+font-family:'Poppins',sans-serif;
 font-size:1.4em;
 line-height:1.6em;
+color:#ffd6e7;
 }
 
 /* button */
@@ -57,8 +59,10 @@ font-size:2em;
 
 #message{
 display:none;
-font-size:1.3em;
-line-height:1.6em;
+font-family:'Great Vibes',cursive;
+font-size:2em;
+color:#ffe4a3;
+line-height:1.5em;
 white-space:pre-line;
 }
 
@@ -79,16 +83,23 @@ box-shadow:0 0 25px rgba(255,255,255,0.7);
 
 #finalWish{
 display:none;
-font-size:4em;
-font-weight:bold;
+font-family:'Pacifico',cursive;
+font-size:4.5em;
 color:#ff4b7d;
 margin-top:40px;
 animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
-from{ text-shadow:0 0 10px #ff4b7d;}
-to{ text-shadow:0 0 35px #ff4b7d;}
+from{
+text-shadow:0 0 10px #ff4b7d;
+}
+to{
+text-shadow:
+0 0 20px #ff4b7d,
+0 0 40px #ff4b7d,
+0 0 60px #ff4b7d;
+}
 }
 
 /* hearts */
@@ -189,13 +200,21 @@ let index=0;
 
 function typeLetter(){
 
-if(index<text.length){
+if(index < text.length){
 
-document.getElementById("message").innerHTML+=text.charAt(index);
+let char = text.charAt(index);
+
+document.getElementById("message").innerHTML += char;
 
 index++;
 
-setTimeout(typeLetter,40);
+let speed = 90;
+
+if(char === "\n"){
+speed = 500;   // pause after each line
+}
+
+setTimeout(typeLetter, speed);
 
 }
 
