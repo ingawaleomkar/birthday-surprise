@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Neha 💖</title>
+<title>Happy Birthday Neha ❤️</title>
 
 <style>
 
@@ -41,11 +41,11 @@ z-index:2;
 max-width:700px;
 }
 
-/* name animation */
+/* name */
 
 #name{
 font-size:3em;
-letter-spacing:3px;
+letter-spacing:2px;
 }
 
 /* button */
@@ -76,7 +76,21 @@ line-height:1.6em;
 white-space:pre-line;
 }
 
-/* hearts floating */
+/* slideshow */
+
+#slideshow{
+display:none;
+margin-top:30px;
+}
+
+#slideImage{
+width:320px;
+border-radius:15px;
+box-shadow:0 0 25px rgba(255,255,255,0.6);
+transition:0.8s;
+}
+
+/* floating hearts */
 
 .heart{
 position:absolute;
@@ -90,7 +104,7 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-10vh);opacity:0;}
 }
 
-/* fireworks canvas */
+/* fireworks */
 
 canvas{
 position:fixed;
@@ -113,10 +127,14 @@ z-index:1;
 
 <div id="message"></div>
 
+<div id="slideshow">
+<img id="slideImage" src="IMG_0029.jpg">
+</div>
+
 </div>
 
 <audio id="romanticMusic" loop>
-<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+<source src="music.mp3" type="audio/mp3">
 </audio>
 
 <canvas id="fireworks"></canvas>
@@ -138,15 +156,13 @@ setTimeout(typeName,80);
 
 typeName();
 
-
-/* starry background */
+/* stars */
 
 function createStars(){
 
 for(let i=0;i<120;i++){
 
 const star=document.createElement("div");
-
 star.classList.add("star");
 
 let size=Math.random()*3;
@@ -164,7 +180,6 @@ document.body.appendChild(star);
 }
 
 createStars();
-
 
 /* floating hearts */
 
@@ -186,7 +201,6 @@ setTimeout(()=>{heart.remove();},6000);
 }
 
 setInterval(createHeart,300);
-
 
 /* love letter typing */
 
@@ -220,6 +234,31 @@ setTimeout(typeLetter,40);
 
 }
 
+/* slideshow */
+
+let images=[
+"IMG_0029.jpg",
+"IMG_5475.jpg",
+"IMG_9301.jpg"
+];
+
+let current=0;
+
+function startSlideshow(){
+
+setInterval(()=>{
+
+current++;
+
+if(current>=images.length){
+current=0;
+}
+
+document.getElementById("slideImage").src=images[current];
+
+},3000);
+
+}
 
 /* button click */
 
@@ -229,16 +268,17 @@ document.getElementById("message").style.display="block";
 
 document.getElementById("surpriseBtn").style.display="none";
 
-document.getElementById("romanticMusic").play();
-
 typeLetter();
 
 heartBurst();
 
 startFireworks();
 
-}
+document.getElementById("slideshow").style.display="block";
 
+startSlideshow();
+
+}
 
 /* heart burst */
 
@@ -272,7 +312,6 @@ setTimeout(()=>{heart.remove();},2000);
 }
 
 }
-
 
 /* fireworks */
 
