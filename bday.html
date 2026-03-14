@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 
 body{
 margin:0;
-font-family:'Segoe UI';
+font-family:'Poppins',sans-serif;
 background:black;
 color:white;
 display:flex;
@@ -29,7 +31,6 @@ z-index:2;
 /* intro */
 
 #intro{
-font-family:'Poppins',sans-serif;
 font-size:1.4em;
 line-height:1.6em;
 color:#ffd6e7;
@@ -70,7 +71,7 @@ white-space:pre-line;
 
 #slideshow{
 display:none;
-margin-top:25px;
+margin-top:30px;
 }
 
 #slideImage{
@@ -79,14 +80,14 @@ border-radius:15px;
 box-shadow:0 0 25px rgba(255,255,255,0.7);
 }
 
-/* final birthday */
+/* birthday message */
 
 #finalWish{
 display:none;
 font-family:'Pacifico',cursive;
 font-size:4.5em;
 color:#ff4b7d;
-margin-top:40px;
+margin-top:60px;
 animation:glow 2s infinite alternate;
 }
 
@@ -102,7 +103,7 @@ text-shadow:
 }
 }
 
-/* hearts */
+/* floating hearts */
 
 .heart{
 position:absolute;
@@ -116,7 +117,7 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-10vh);}
 }
 
-/* fireworks */
+/* fireworks canvas */
 
 canvas{
 position:fixed;
@@ -181,7 +182,7 @@ setTimeout(showMessage,2000);
 
 }
 
-/* love letter */
+/* love letter text */
 
 const text=`From the moment you came into my life,
 everything became brighter.
@@ -198,6 +199,8 @@ to have you in my life.`;
 
 let index=0;
 
+/* typing effect */
+
 function typeLetter(){
 
 if(index < text.length){
@@ -211,10 +214,17 @@ index++;
 let speed = 90;
 
 if(char === "\n"){
-speed = 500;   // pause after each line
+speed = 500;
 }
 
 setTimeout(typeLetter, speed);
+
+}
+else{
+
+setTimeout(()=>{
+document.getElementById("finalWish").style.display="block";
+},1200);
 
 }
 
@@ -237,14 +247,6 @@ startFireworks();
 document.getElementById("slideshow").style.display="block";
 
 startSlideshow();
-
-/* show final wish after delay */
-
-setTimeout(()=>{
-
-document.getElementById("finalWish").style.display="block";
-
-},12000);
 
 }
 
@@ -272,7 +274,7 @@ document.getElementById("slideImage").src=images[current];
 
 }
 
-/* hearts */
+/* floating hearts */
 
 function createHeart(){
 
@@ -329,20 +331,25 @@ setTimeout(()=>heart.remove(),2000);
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 
+function resizeCanvas(){
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize",resizeCanvas);
 
 function startFireworks(){
 
 setInterval(()=>{
 
 let x=Math.random()*canvas.width;
-let y=Math.random()*canvas.height/2;
+let y=Math.random()*canvas.height*0.6;
 
-for(let i=0;i<30;i++){
+for(let i=0;i<40;i++){
 
 let angle=Math.random()*Math.PI*2;
-let radius=Math.random()*80;
+let radius=Math.random()*100;
 
 ctx.beginPath();
 
@@ -359,7 +366,7 @@ ctx.fill();
 
 }
 
-},500);
+},600);
 
 }
 
