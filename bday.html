@@ -30,13 +30,38 @@ z-index:2;
 
 /* intro message */
 
-#intro p{
+#introText{
 white-space: pre-line;
 font-size:1.3em;
 line-height:1.7em;
+color:#ffd6e7;
 }
 
-/* button */
+/* greeting style */
+.greeting{
+font-size:1.9em;
+color:#ff7aa8;
+font-weight:500;
+text-shadow:0 0 10px rgba(255,120,160,0.6);
+opacity:0;
+animation:fadeGreeting 3s ease forwards;
+}
+
+/* fade animation */
+
+@keyframes fadeGreeting{
+
+0%{
+opacity:0;
+transform:translateY(15px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+}
 
 button{
 margin-top:25px;
@@ -152,8 +177,8 @@ opacity:0;
 
 <div id="intro">
 
-<p>
-Hey Neha... ❤️
+<p id="introText">
+<span class="greeting">Hey Neha... ❤️</span>
 
 Today is a very special day 🎉  
 And I didn’t want to just send a normal message 💌
