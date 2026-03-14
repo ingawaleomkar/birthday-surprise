@@ -137,6 +137,8 @@ margin-top:20px;
 width:260px;
 border-radius:15px;
 box-shadow:0 0 20px rgba(255,255,255,0.6);
+transition:opacity 1s ease;
+opacity:1;
 }
 
 /* birthday text */
@@ -295,6 +297,8 @@ else{
 
 setTimeout(()=>{
 document.getElementById("finalWish").style.display="block";
+megaHeartExplosion();  
+startFireworks();
 },1200);
 
 }
@@ -313,14 +317,41 @@ typeLetter();
 
 heartBurst();
 
-startFireworks();
-
 document.getElementById("slideshow").style.display="block";
 
 startSlideshow();
 
 }
 
+function megaHeartExplosion(){
+
+for(let i=0;i<80;i++){
+
+const heart=document.createElement("div");
+
+heart.innerHTML="💖";
+
+heart.style.position="fixed";
+heart.style.left="50%";
+heart.style.top="50%";
+heart.style.fontSize="30px";
+heart.style.transition="all 2s ease";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.style.left=(50+Math.random()*80-40)+"%";
+heart.style.top=(50+Math.random()*80-40)+"%";
+heart.style.opacity="0";
+
+},10);
+
+setTimeout(()=>heart.remove(),2000);
+
+}
+
+}
 /* slideshow */
 
 let images=[
@@ -335,13 +366,23 @@ function startSlideshow(){
 
 setInterval(()=>{
 
+let img=document.getElementById("slideImage");
+
+img.style.opacity=0;
+
+setTimeout(()=>{
+
 current++;
 
 if(current>=images.length) current=0;
 
-document.getElementById("slideImage").src=images[current];
+img.src=images[current];
 
-},3000);
+img.style.opacity=1;
+
+},500);
+
+},3500);
 
 }
 
