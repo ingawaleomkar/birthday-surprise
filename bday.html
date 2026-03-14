@@ -80,7 +80,7 @@ button:hover{
 
 <h1>Happy Birthday My Love ❤️</h1>
 
-<button onclick="showMessage()">Click for Your Surprise</button>
+<button id="surpriseBtn" onclick="showMessage()">Click for Your Surprise</button>
 
 <div id="message">
 <p>
@@ -104,7 +104,8 @@ I love you more than words can ever say.
 <script>
 
 function showMessage(){
-document.getElementById("message").style.display="block";
+ document.getElementById("message").style.display="block";
+  document.getElementById("surpriseBtn").style.display="none";
 }
 
 function createHeart(){
