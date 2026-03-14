@@ -69,9 +69,29 @@ padding:14px 32px;
 font-size:18px;
 border:none;
 border-radius:30px;
-background:#ff4b7d;
+background:linear-gradient(135deg,#ff9ec4,#ff6fa5);
 color:white;
 cursor:pointer;
+box-shadow:0 5px 15px rgba(255,105,150,0.4);
+
+animation:pulse 2s infinite;
+transition:0.3s;
+}
+
+/* hover for desktop */
+
+button:hover{
+transform:scale(1.08);
+}
+
+/* pulse animation */
+
+@keyframes pulse{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+
 }
 
 /* loading */
