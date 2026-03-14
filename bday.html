@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 
@@ -24,14 +24,14 @@ text-align:center;
 /* container */
 
 .container{
-max-width:650px;
+max-width:600px;
 z-index:2;
 }
 
-/* intro */
+/* intro message */
 
 #intro{
-font-size:1.4em;
+font-size:1.3em;
 line-height:1.6em;
 color:#ffd6e7;
 }
@@ -40,7 +40,7 @@ color:#ffd6e7;
 
 button{
 margin-top:25px;
-padding:15px 35px;
+padding:14px 32px;
 font-size:18px;
 border:none;
 border-radius:30px;
@@ -53,17 +53,16 @@ cursor:pointer;
 
 #loading{
 display:none;
-font-size:2em;
+font-size:1.8em;
 }
 
-/* love letter */
+/* romantic message */
 
 #message{
 display:none;
-font-family:'Great Vibes',cursive;
-font-size:2em;
+font-size:1.3em;
 color:#ffe4a3;
-line-height:1.5em;
+line-height:1.6em;
 white-space:pre-line;
 }
 
@@ -71,43 +70,36 @@ white-space:pre-line;
 
 #slideshow{
 display:none;
-margin-top:30px;
+margin-top:20px;
 }
 
 #slideImage{
-width:320px;
+width:260px;
 border-radius:15px;
-box-shadow:0 0 25px rgba(255,255,255,0.7);
+box-shadow:0 0 20px rgba(255,255,255,0.6);
 }
 
-/* birthday message */
+/* birthday text */
 
 #finalWish{
 display:none;
 font-family:'Pacifico',cursive;
-font-size:4.5em;
+font-size:3.5em;
 color:#ff4b7d;
-margin-top:60px;
+margin-top:25px;
 animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
-from{
-text-shadow:0 0 10px #ff4b7d;
-}
-to{
-text-shadow:
-0 0 20px #ff4b7d,
-0 0 40px #ff4b7d,
-0 0 60px #ff4b7d;
-}
+from{ text-shadow:0 0 10px #ff4b7d;}
+to{ text-shadow:0 0 40px #ff4b7d;}
 }
 
-/* floating hearts */
+/* hearts */
 
 .heart{
 position:absolute;
-font-size:20px;
+font-size:18px;
 color:red;
 animation:float 6s linear infinite;
 }
@@ -124,6 +116,31 @@ position:fixed;
 top:0;
 left:0;
 pointer-events:none;
+}
+
+/* shooting star */
+
+.shooting-star{
+position:fixed;
+width:3px;
+height:3px;
+background:white;
+box-shadow:0 0 10px white,0 0 20px white;
+animation:shoot 1s linear forwards;
+}
+
+@keyframes shoot{
+
+0%{
+transform:translate(0,0);
+opacity:1;
+}
+
+100%{
+transform:translate(-600px,300px);
+opacity:0;
+}
+
 }
 
 </style>
@@ -182,20 +199,16 @@ setTimeout(showMessage,2000);
 
 }
 
-/* love letter text */
+/* short romantic message */
 
 const text=`From the moment you came into my life,
 everything became brighter.
 
-Your smile is my favorite sight,
-your voice is my favorite sound.
+Your smile is my favorite sight.
 
 You are my today,
 my tomorrow,
-and my forever.
-
-I feel lucky every single day
-to have you in my life.`;
+and my forever. ❤️`;
 
 let index=0;
 
@@ -205,19 +218,17 @@ function typeLetter(){
 
 if(index < text.length){
 
-let char = text.charAt(index);
+let char=text.charAt(index);
 
-document.getElementById("message").innerHTML += char;
+document.getElementById("message").innerHTML+=char;
 
 index++;
 
-let speed = 90;
+let speed=80;
 
-if(char === "\n"){
-speed = 500;
-}
+if(char==="\\n"){ speed=400; }
 
-setTimeout(typeLetter, speed);
+setTimeout(typeLetter,speed);
 
 }
 else{
@@ -292,7 +303,7 @@ setTimeout(()=>heart.remove(),6000);
 
 }
 
-setInterval(createHeart,300);
+setInterval(createHeart,400);
 
 /* heart burst */
 
@@ -307,7 +318,7 @@ heart.innerHTML="💖";
 heart.style.position="fixed";
 heart.style.left="50%";
 heart.style.top="50%";
-heart.style.fontSize="26px";
+heart.style.fontSize="24px";
 heart.style.transition="all 2s";
 
 document.body.appendChild(heart);
@@ -369,6 +380,25 @@ ctx.fill();
 },600);
 
 }
+
+/* shooting star */
+
+function createShootingStar(){
+
+const star=document.createElement("div");
+
+star.classList.add("shooting-star");
+
+star.style.top=Math.random()*window.innerHeight*0.5+"px";
+star.style.left=window.innerWidth+"px";
+
+document.body.appendChild(star);
+
+setTimeout(()=>{ star.remove(); },1000);
+
+}
+
+setInterval(createShootingStar,8000);
 
 </script>
 
