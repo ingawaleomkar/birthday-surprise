@@ -1,56 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Neha ❤️</title>
+<title>Birthday Surprise</title>
 
 <style>
 
 body{
 margin:0;
-padding:0;
-font-family:'Segoe UI',sans-serif;
+font-family:'Segoe UI';
 background:black;
-height:100vh;
-overflow:hidden;
+color:white;
 display:flex;
 justify-content:center;
 align-items:center;
+height:100vh;
+overflow:hidden;
 text-align:center;
-color:white;
-}
-
-/* stars */
-
-.star{
-position:absolute;
-background:white;
-border-radius:50%;
-animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
 }
 
 /* container */
 
 .container{
+max-width:650px;
 z-index:2;
-max-width:700px;
 }
 
-/* name */
+/* intro */
 
-#name{
-font-size:3em;
-letter-spacing:2px;
+#intro{
+font-size:1.4em;
+line-height:1.6em;
 }
 
 /* button */
 
 button{
+margin-top:25px;
 padding:15px 35px;
 font-size:18px;
 border:none;
@@ -58,19 +44,19 @@ border-radius:30px;
 background:#ff4b7d;
 color:white;
 cursor:pointer;
-margin-top:20px;
-transition:0.3s;
 }
 
-button:hover{
-transform:scale(1.1);
+/* loading */
+
+#loading{
+display:none;
+font-size:2em;
 }
 
-/* message */
+/* love letter */
 
 #message{
 display:none;
-margin-top:25px;
 font-size:1.3em;
 line-height:1.6em;
 white-space:pre-line;
@@ -80,28 +66,43 @@ white-space:pre-line;
 
 #slideshow{
 display:none;
-margin-top:30px;
+margin-top:25px;
 }
 
 #slideImage{
 width:320px;
 border-radius:15px;
-box-shadow:0 0 25px rgba(255,255,255,0.6);
-transition:0.8s;
+box-shadow:0 0 25px rgba(255,255,255,0.7);
 }
 
-/* floating hearts */
+/* final birthday */
+
+#finalWish{
+display:none;
+font-size:4em;
+font-weight:bold;
+color:#ff4b7d;
+margin-top:40px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px #ff4b7d;}
+to{ text-shadow:0 0 35px #ff4b7d;}
+}
+
+/* hearts */
 
 .heart{
 position:absolute;
-color:red;
 font-size:20px;
+color:red;
 animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-10vh);opacity:0;}
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
 }
 
 /* fireworks */
@@ -111,7 +112,6 @@ position:fixed;
 top:0;
 left:0;
 pointer-events:none;
-z-index:1;
 }
 
 </style>
@@ -121,9 +121,27 @@ z-index:1;
 
 <div class="container">
 
-<h1 id="name"></h1>
+<div id="intro">
 
-<button id="surpriseBtn" onclick="showMessage()">Click for Your Surprise ❤️</button>
+<p>
+Hey Neha ❤️
+
+Today is a very special day.  
+And I didn’t want to just send a normal message.
+
+So I made something for you.
+
+Take a deep breath...  
+Smile a little 😊  
+
+Then press the button below.
+</p>
+
+<button onclick="startSurprise()">Open Your Birthday Surprise 🎁</button>
+
+</div>
+
+<div id="loading">✨ Loading your surprise... ✨</div>
 
 <div id="message"></div>
 
@@ -131,80 +149,30 @@ z-index:1;
 <img id="slideImage" src="IMG_0029.jpg">
 </div>
 
+<div id="finalWish">
+HAPPY BIRTHDAY NEHA ❤️
 </div>
 
-<audio id="romanticMusic" loop>
-<source src="music.mp3" type="audio/mp3">
-</audio>
+</div>
 
 <canvas id="fireworks"></canvas>
 
 <script>
 
-/* name typing */
+/* start surprise */
 
-const nameText="Happy Birthday Dear Neha ❤️";
-let nameIndex=0;
+function startSurprise(){
 
-function typeName(){
-if(nameIndex<nameText.length){
-document.getElementById("name").innerHTML+=nameText.charAt(nameIndex);
-nameIndex++;
-setTimeout(typeName,80);
-}
-}
+document.getElementById("intro").style.display="none";
+document.getElementById("loading").style.display="block";
 
-typeName();
-
-/* stars */
-
-function createStars(){
-
-for(let i=0;i<120;i++){
-
-const star=document.createElement("div");
-star.classList.add("star");
-
-let size=Math.random()*3;
-
-star.style.width=size+"px";
-star.style.height=size+"px";
-
-star.style.top=Math.random()*100+"vh";
-star.style.left=Math.random()*100+"vw";
-
-document.body.appendChild(star);
+setTimeout(showMessage,2000);
 
 }
 
-}
+/* love letter */
 
-createStars();
-
-/* floating hearts */
-
-function createHeart(){
-
-const heart=document.createElement("div");
-
-heart.classList.add("heart");
-heart.innerHTML="❤️";
-
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(10+Math.random()*30)+"px";
-heart.style.animationDuration=(3+Math.random()*5)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{heart.remove();},6000);
-
-}
-
-setInterval(createHeart,300);
-
-/* love letter typing */
-
-const letter=`From the moment you came into my life,
+const text=`From the moment you came into my life,
 everything became brighter.
 
 Your smile is my favorite sight,
@@ -214,23 +182,50 @@ You are my today,
 my tomorrow,
 and my forever.
 
-Happy Birthday my beautiful wife.
+I feel lucky every single day
+to have you in my life.`;
 
-I love you more than words can ever say. 💕`;
-
-let letterIndex=0;
+let index=0;
 
 function typeLetter(){
 
-if(letterIndex<letter.length){
+if(index<text.length){
 
-document.getElementById("message").innerHTML+=letter.charAt(letterIndex);
+document.getElementById("message").innerHTML+=text.charAt(index);
 
-letterIndex++;
+index++;
 
 setTimeout(typeLetter,40);
 
 }
+
+}
+
+/* show message */
+
+function showMessage(){
+
+document.getElementById("loading").style.display="none";
+
+document.getElementById("message").style.display="block";
+
+typeLetter();
+
+heartBurst();
+
+startFireworks();
+
+document.getElementById("slideshow").style.display="block";
+
+startSlideshow();
+
+/* show final wish after delay */
+
+setTimeout(()=>{
+
+document.getElementById("finalWish").style.display="block";
+
+},12000);
 
 }
 
@@ -250,9 +245,7 @@ setInterval(()=>{
 
 current++;
 
-if(current>=images.length){
-current=0;
-}
+if(current>=images.length) current=0;
 
 document.getElementById("slideImage").src=images[current];
 
@@ -260,31 +253,31 @@ document.getElementById("slideImage").src=images[current];
 
 }
 
-/* button click */
+/* hearts */
 
-function showMessage(){
+function createHeart(){
 
-document.getElementById("message").style.display="block";
+const heart=document.createElement("div");
 
-document.getElementById("surpriseBtn").style.display="none";
+heart.classList.add("heart");
 
-typeLetter();
+heart.innerHTML="❤️";
 
-heartBurst();
+heart.style.left=Math.random()*100+"vw";
 
-startFireworks();
+document.body.appendChild(heart);
 
-document.getElementById("slideshow").style.display="block";
-
-startSlideshow();
+setTimeout(()=>heart.remove(),6000);
 
 }
+
+setInterval(createHeart,300);
 
 /* heart burst */
 
 function heartBurst(){
 
-for(let i=0;i<40;i++){
+for(let i=0;i<30;i++){
 
 const heart=document.createElement("div");
 
@@ -294,7 +287,7 @@ heart.style.position="fixed";
 heart.style.left="50%";
 heart.style.top="50%";
 heart.style.fontSize="26px";
-heart.style.transition="all 2s ease";
+heart.style.transition="all 2s";
 
 document.body.appendChild(heart);
 
@@ -302,12 +295,11 @@ setTimeout(()=>{
 
 heart.style.left=(50+Math.random()*40-20)+"%";
 heart.style.top=(50+Math.random()*40-20)+"%";
-
 heart.style.opacity="0";
 
 },10);
 
-setTimeout(()=>{heart.remove();},2000);
+setTimeout(()=>heart.remove(),2000);
 
 }
 
@@ -326,13 +318,11 @@ function startFireworks(){
 setInterval(()=>{
 
 let x=Math.random()*canvas.width;
-
 let y=Math.random()*canvas.height/2;
 
 for(let i=0;i<30;i++){
 
 let angle=Math.random()*Math.PI*2;
-
 let radius=Math.random()*80;
 
 ctx.beginPath();
@@ -346,7 +336,6 @@ Math.PI*2
 );
 
 ctx.fillStyle="white";
-
 ctx.fill();
 
 }
