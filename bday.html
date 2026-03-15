@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Birthday Surprise</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
@@ -145,16 +145,28 @@ opacity:1;
 
 #finalWish{
 display:none;
-font-family:'Pacifico',cursive;
-font-size:3.5em;
-color:#ff4b7d;
-margin-top:25px;
-animation:glow 2s infinite alternate;
+margin-top:30px;
 }
 
-@keyframes glow{
+.hbd{
+font-family:'Poppins',sans-serif;
+font-size:2.5em;
+letter-spacing:2px;
+color:#ffd6e7;
+display:block;
+}
+
+.name{
+font-family:'Great Vibes',cursive;
+font-size:4.5em;
+color:#ff4b7d;
+text-shadow:0 0 10px #ff4b7d,0 0 25px #ff4b7d;
+animation:glowName 2s infinite alternate;
+}
+
+@keyframes glowName{
 from{ text-shadow:0 0 10px #ff4b7d;}
-to{ text-shadow:0 0 40px #ff4b7d;}
+to{ text-shadow:0 0 35px #ff4b7d;}
 }
 
 #finalWish span{
@@ -262,11 +274,9 @@ Then press the button below 👇
 </div>
 
 <div id="finalWish">
-<span>H</span><span>A</span><span>P</span><span>P</span><span>Y</span>
+<span class="hbd">Happy Birthday</span>
 <br>
-<span>B</span><span>I</span><span>R</span><span>T</span><span>H</span><span>D</span><span>A</span><span>Y</span>
-<br>
-<span>N</span><span>E</span><span>H</span><span>A</span> ❤️
+<span class="name">Neha ❤️</span>
 </div>
 
 </div>
