@@ -157,6 +157,27 @@ from{ text-shadow:0 0 10px #ff4b7d;}
 to{ text-shadow:0 0 40px #ff4b7d;}
 }
 
+#finalWish span{
+opacity:0;
+display:inline-block;
+animation:letterGlow 0.6s forwards;
+}
+
+@keyframes letterGlow{
+
+0%{
+opacity:0;
+transform:translateY(20px);
+text-shadow:none;
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+text-shadow:0 0 20px #ff4b7d,0 0 40px #ff4b7d;
+}
+
+}
 /* hearts */
 
 .heart{
@@ -241,7 +262,11 @@ Then press the button below 👇
 </div>
 
 <div id="finalWish">
-HAPPY BIRTHDAY NEHA ❤️
+<span>H</span><span>A</span><span>P</span><span>P</span><span>Y</span>
+<br>
+<span>B</span><span>I</span><span>R</span><span>T</span><span>H</span><span>D</span><span>A</span><span>Y</span>
+<br>
+<span>N</span><span>E</span><span>H</span><span>A</span> ❤️
 </div>
 
 </div>
@@ -296,14 +321,21 @@ setTimeout(typeLetter,speed);
 else{
 
 setTimeout(()=>{
+
 document.getElementById("finalWish").style.display="block";
-  
+
+animateBirthdayText();
+
 document.getElementById("slideshow").style.display="block";
 
 startSlideshow();
-megaHeartExplosion();  
+
+megaHeartExplosion();
+
 startFireworks();
+
 },1200);
+
 
 }
 
@@ -482,6 +514,18 @@ ctx.fill();
 
 }
 
+function animateBirthdayText(){
+
+let letters=document.querySelectorAll("#finalWish span");
+
+letters.forEach((letter,index)=>{
+
+letter.style.animationDelay=(index*0.15)+"s";
+
+});
+
+}
+  
 /* shooting star */
 
 function createShootingStar(){
